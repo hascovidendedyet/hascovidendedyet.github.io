@@ -82,45 +82,98 @@
       outline: none;
     }
 
-    .Aligner {
+.aligner {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   width: 100%;
-  height: 400px;
+  height: 600px;
 }
 
-.Aligner-item {
+.aligner-item{
   max-width: 50%;
 }
 
 .reply {
-    opacity: 0;
-    transition: opacity 500ms;
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: transform 500ms, opacity 500ms;
 }
 
 .reply-visible {
-    opacity: 1;
+  opacity: 1;
+  transform: translateY(-10px);
 }
+
+.why-button {
+  opacity: 0;
+  will-change: opacity;
+  transition: opacity 1000ms;
+  transition-delay: 1000ms;
+}
+
+.why-button-visible {
+  opacity: 1;
+}
+
+.explanation {
+    font-size: 15px;
+    opacity: 0;
+    will-change: transform, opacity;
+    transition: transform 500ms, opacity 500ms;
+}
+
+.explanation-visible {
+    opacity: 1;
+    transform: translateY(-10px);
+}
+
 </style>
 <script>
     function showReply() {
-        document.getElementById("reply").classList.add('reply-visible');
-}
+      document.getElementById("why").classList.add('why-button-visible');
+      document.getElementById("reply").classList.add('reply-visible');
+    } 
+
+    function showExplanation() {
+      document.getElementById("explanation").classList.add('explanation-visible');
+    } 
 </script>
-<div class="Aligner">
-<div class="Aligner-item">
-    <button class="pushable" onclick="showReply()">
+<div class="aligner">
+  <div class="aligner-item">
+      <button class="pushable" onclick="showReply()">
+          <span class="shadow"></span>
+          <span class="edge"></span>
+          <span class="front">
+              Has covid ended yet?
+          </span>
+          </button>
+  </div>
+  <div class="aligner-item">
+    <div id="reply" class="reply">
+        <h1 style="text-align:center; font-family: Arial, Helvetica, sans-serif">
+        No
+        </h1>
+    </div>
+  </div>
+  <div id="why" class="aligner-item why-button">
+    <button class="pushable" onclick="showExplanation()">
         <span class="shadow"></span>
         <span class="edge"></span>
         <span class="front">
-            Has covid ended yet?
+            Why?
         </span>
-        </button>
-        <div id="reply" class="reply">
-            <h1 style="text-align:center; font-family: Arial, Helvetica, sans-serif">
-            No
-            </h1>
+    </button>
+  </div>
+  <div class="aligner-item">
+        <div id="explanation" class="explanation">
+            <p style="text-align:center; font-family: Arial, Helvetica, sans-serif">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
         </div>
-</div>
+  </div>
 </div>
